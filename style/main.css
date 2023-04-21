@@ -1,0 +1,36 @@
+header{
+    padding-left: 30px;
+    padding-top: 20px;
+}
+
+button{
+    border-radius: 5px;
+}
+
+h3{
+    margin : 10px;
+    margin-bottom: 25px;
+}
+
+h5{
+    margin : 10px;
+    margin-bottom: 5px;
+}
+.form-floating{
+    display: inline;
+}
+
+.box{ 
+    margin-left: 1px;
+    margin-bottom: 30px;
+    width: 100%;
+    height: 500px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+}
+
+.boxcon{
+    
+    margin-left: 20px;
+    margin-top: 40px;
+}

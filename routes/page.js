@@ -5,7 +5,6 @@ const router=express.Router();
 
 router.use((req,res,next)=>{
     res.locals.user=null;
-    // res.send('hellodd');
     next();
 })
 
