@@ -1,75 +1,34 @@
-const { google } = require('googleapis');
+const { GoogleSpreadsheet } = require("google-spreadsheet");
+const gs_creds = require("./practice-384605-b85d8d7f9282.json"); // 키 생성 후 다운된 json파일을 지정합니다.
+const doc = new GoogleSpreadsheet("1TkELS-U9GuAAtjtwv4Bzlqv-GoDlMKih4BooG8Qp0NI");
 
-// 구글 클라우드 플랫폼에서 생성한 인증 정보 JSON 파일 경로
-const auth = require('./credentials.json');
+async function authGoogleSheet() {
+    try {
 
-// 인증 정보를 기반으로 인증 클라이언트 생성
-const client = new google.auth.JWT(
-  auth.client_email,
-  null,
-  auth.private_key,
-  ['https://www.googleapis.com/auth/spreadsheets']
-);
-
-// 구글 스프레드시트 ID
-const spreadsheetId = 'your-spreadsheet-id';
-
-async function readSheet() {
-  try {
-    // 인증 클라이언트로 구글 스프레드시트 API를 초기화
-    const sheets = google.sheets({ version: 'v4', auth: client });
-
-    // 스프레드시트에서 읽어올 범위 (A1 셀부터 D10 셀까지)
-    const range = 'Sheet1!A1:D10';
-
-    // 스프레드시트 값 읽기 요청
-    const res = await sheets.spreadsheets.values.get({
-      spreadsheetId,
-      range,
-    });
-
-    // 응답에서 값 추출
-    const rows = res.data.values;
-    console.log(rows);
-  } catch (err) {
-    console.error(err);
-  }
+        await doc.useServiceAccountAuth(gs_creds);
+        await doc.loadInfo();
+    } catch (err) {
+        console.log("AUTH ERROR ", err)
+    }
 }
+authGoogleSheet(); // 처음 시작할 때 문서 접속에 대한 인증을 처리하고 해당 문서를 로드합니다.
 
-async function writeSheet() {
-  try {
-    // 인증 클라이언트로 구글 스프레드시트 API를 초기화
-    const sheets = google.sheets({ version: 'v4', auth: client });
+async function readFirstSheetRow() {
+    await doc.loadInfo();
+    var sheet = doc.sheetsByIndex[0]; // 첫번째 시티를 가져옵니다.
 
-    // 쓸 데이터
-    const data = [
-      ['Name', 'Age', 'City'],
-      ['John', '30', 'New York'],
-      ['Jane', '25', 'Tokyo'],
-      ['Bob', '45', 'London'],
-    ];
+    //cells로 읽는 방법
+    await sheet.loadCells('A1:L15');
+    const cellA1 = sheet.getCell(0, 0);
+    const cellC3 = sheet.getCellByA1('C3');
 
-    // 스프레드시트에 쓸 범위 (A1 셀부터 C4 셀까지)
-    const range = 'Sheet2!A1:C4';
+    //cells로 쓰는 방법
+    cellA1.note = 'This is cell A1';
+    cellA1.value = 123.45;
+    cellA1.textFormat = { bold: true };
+    cellC3.formula = '=A1';
 
-    // 스프레드시트 값 쓰기 요청
-    const res = await sheets.spreadsheets.values.update({
-      spreadsheetId,
-      range,
-      valueInputOption: 'RAW',
-      resource: {
-        values: data,
-      },
-    });
+    await sheet.saveUpdatedCells(); // saves both cells in one API call
 
-    console.log(`Updated ${res.data.updatedCells} cells`);
-  } catch (err) {
-    console.error(err);
-  }
 }
-
-// readSheet 함수 실행
-readSheet();
-
-// writeSheet 함수 실행
-writeSheet();
+readFirstSheetRow();
