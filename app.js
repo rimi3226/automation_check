@@ -6,10 +6,14 @@ const path = require('path');
 const session = require('express-session');
 const nunjucks = require('nunjucks');
 const dotenv = require('dotenv');
+const { google } = require('googleapis');
+
 
 //dotenv 불러오기
 dotenv.config();
 const pageRouter = require('./routes/page');
+
+
 
 //라우터 기본 설정
 const app = express();
