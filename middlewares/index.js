@@ -12,14 +12,25 @@ async function authGoogleSheet() {
         console.log("AUTH ERROR ", err)
     }
 }
-authGoogleSheet(); // 처음 시작할 때 문서 접속에 대한 인증을 처리하고 해당 문서를 로드합니다.
-
 
 //(1) 구글스프레드시트에 있는 사용자인지 확인
-exports.check = (req, res, next) => {
-  var exis=true;
+exports.check = async(req, res, next) => {
+  var exis=false;
 
+  //googlesheet 불러오기
+  authGoogleSheet(); 
+  await doc.loadInfo();
 
+  //해당 반의 시트를 불러온다.
+  var sheet = doc.sheetsByIndex[req.body.class]; 
+  await sheet.loadCells('B7:B100');
+
+  for (var i = 7; i <= 96; i++) {
+    if(sheet.getCellByA1('B'+i).value===req.body.name){
+      exis=true;
+    }
+  }
+  
   if (exis) {
     next();
   } else {
