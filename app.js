@@ -12,6 +12,7 @@ const { google } = require('googleapis');
 //dotenv 불러오기
 dotenv.config();
 const pageRouter = require('./routes/page');
+const authRouter = require('./routes/auth');
 
 
 
@@ -42,6 +43,8 @@ app.use(session({
 
 //app.use는 항상 쓰는 미들웨어이다.
 app.use('/', pageRouter);
+app.use('/auth',authRouter);
+
 
 app.use((req, res, next) => {
   const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`); //없는 페이지에 온 경우, 404 Not Found

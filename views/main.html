@@ -41,14 +41,18 @@
                 <label for="pnumber" class="px-4">전화번호</label>
             </div>
             <div class="col-auto">
-                <button type="button" style="height: 58px; " class="btn btn-outline-primary">인증</button>
+                <form id="pnum-form" action="/auth/pnum" method="get">
+                    <button type="submit" style="height: 58px; " class="btn btn-outline-primary">인증</button>
+                </form>
             </div>
             <div class="col-auto form-floating mb-3">
                 <input type="text" class="form-control" id="pass" placeholder="인증번호">
                 <label for="pass" class="px-4">인증번호</label>
             </div>
             <div class="col-auto">
-                <button type="button" style="height: 58px;" class="btn btn-outline-secondary">확인</button>
+                <form id="anum-form" action="/auth/anum" method="get">
+                    <button type="submit" style="height: 58px;" class="btn btn-outline-secondary">확인</button>
+                </form>
             </div>
             <img src="../image/character.png" style="float : right; height:60px; width:80px; ">
 
