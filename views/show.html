@@ -1,147 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'layout.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"
-        integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"
-        integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ"
-        crossorigin="anonymous"></script>
+{% block content %}
+<h3 style="text-align: center;"> 000님 전체 출석률은 80% 입니다. </h3>
 
-    <link rel="stylesheet" href="/css/main.css">
-    <title>STEP UP 출석 확인</title>
-</head>
-
-<body>
+<hr style="border: solid 2px; margin-top: 50px; margin-bottom: 30px;">
 
 
+<table class="table mt-5" style="text-align: center;">
+    <p></p>
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">1주차</th>
+            <th scope="col">2주차</th>
+            <th scope="col">3주차</th>
+            <th scope="col">4주차</th>
+            <th scope="col">5주차</th>
+            <th scope="col">6주차</th>
+            <th scope="col">7주차</th>
+            <th scope="col">8주차</th>
+            <th scope="col">9주차</th>
+            <th scope="col">10주차</th>
+            <th scope="col">11주차</th>
+        </tr>
+    </thead>
 
-    <div class="container">
+    <tbody>
+        <!-- 아직 렌더링 받은 결과가 없기때문에 잘 나오는지 확인하기위해서 array를 하나 선언했다. -->
+        {% set array = ['O','O','O','O','O','O','O','O','O','O','O'] %}
+        <tr>
+            <th scope="row">LC</th>
+            {% for item in array%}     
+                <td> {{item}} </td>
+            {% endfor %}
+           
+        </tr>
 
-        <header class="row">
-            <h1 class="col-10" style="float:left;">STEP UP 출석 확인</h1>
-            <img class="col-2" src="../image/logo.png" style="float : right;" height="40px">
-        </header>
-        <hr>
-        <hr>
-        
-        <div class="row ">
+        <tr>
+            <th scope="row">RC</th>
+            {% for item in array%}     
+                <td> {{item}} </td>
+            {% endfor %}
+        </tr>
 
-            <div class="col-auto form-floating mb-3 ">
-                <input type="text" class="form-control" id="name" placeholder="이름">
-                <label for="pnumber" class="px-4">이름</label>
-            </div>
-            <div class="col-auto form-floating mb-3">
-                <input type="text" class="form-control" id="pnumber" placeholder="전화번호">
-                <label for="pnumber" class="px-4">전화번호</label>
-            </div>
-            <div class="col-auto">
-                <button type="button" style="height: 58px; " class="btn btn-outline-primary">인증</button>
-            </div>
-            <div class="col-auto form-floating mb-3">
-                <input type="text" class="form-control" id="pass" placeholder="인증번호">
-                <label for="pass" class="px-4">인증번호</label>
-            </div>
-            <div class="col-auto">
-                <button type="button" style="height: 58px;" class="btn btn-outline-secondary">확인</button>
-            </div>
-            <img src="../image/character.png" style="float : right; height:60px; width:80px; ">
+        <tr>
+            <th scope="row"> 출 석</th>
+            {% for item in array%}     
+                <td> {{item}} </td>
+            {% endfor %}
+        </tr>
+    </tbody>
+</table>
 
-
-        </div>
-        <!-- 박스 안 -->
-        <div class="box ">
-
-            <h3 style="text-align: center;"> 000님 전체 출석률은 80% 입니다. </h3>
-
-            <hr style="border: solid 2px; margin-top: 50px; margin-bottom: 30px;">
-
-
-            <table class="table mt-5" style="text-align: center;">
-            <p></p>
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">1주차</th>
-                        <th scope="col">2주차</th>
-                        <th scope="col">3주차</th>
-                        <th scope="col">4주차</th>
-                        <th scope="col">5주차</th>
-                        <th scope="col">6주차</th>
-                        <th scope="col">7주차</th>
-                        <th scope="col">8주차</th>
-                        <th scope="col">9주차</th>
-                        <th scope="col">10주차</th>
-                        <th scope="col">11주차</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    <tr>
-                        <th scope="row">LC</th>
-                        <td> O </td>
-                        <td> O </td>
-                        <td> O </td>
-                        <td> O </td>
-                        <td> O </td>
-                        <td> O </td>
-                        <td> X </td>
-                        <td> O </td>
-                        <td> O </td>
-                        <td> O </td>
-                        <td> O </td>
-                    </tr>
-
-                    <tr>
-                        <th scope="row">RC</th>
-                        <td> O </td>
-                        <td> O </td>
-                        <td> O </td>
-                        <td> O </td>
-                        <td> X </td>
-                        <td> O </td>
-                        <td> O </td>
-                        <td> O </td>
-                        <td> O </td>
-                        <td> O </td>
-                        <td> O </td>
-                    </tr>
-
-                    <tr>
-                        <th scope="row"> 출 석</th>
-                        <td> O </td>
-                        <td> O </td>
-                        <td> O </td>
-                        <td> O </td>
-                        <td> X </td>
-                        <td> O </td>
-                        <td> X </td>
-                        <td> O </td>
-                        <td> O </td>
-                        <td> O </td>
-                        <td> O </td>
-                    </tr>
-
-
-                </tbody>
-            </table>
-
-
-        </div>
-
-    </div>
-
-    <footer class="bg-light text-center text-lg-start">
-        <div class="text-center footer_f">
-          <h6> 문의 : 032-835-9962 / 010-4300-0340</h6>
-        </div>
-    </footer>
-</body>
-
-</html>
+{% endblock %}

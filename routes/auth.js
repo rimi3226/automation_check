@@ -6,9 +6,9 @@ const {anum} = require('../controllers/anum.js');
 
 const router = express.Router();
 
-// GET /auth/pnum
-router.get('/pnum',check ,pnum); 
-router.get('/anum', anum); 
+// POST
+router.post('/pnum',check ,pnum); 
+router.post('/anum', anum); 
 
 
 module.exports = router;
