@@ -30,7 +30,7 @@
         {% set array = ['O','O','O','O','O','O','O','O','O','O','O'] %}
         <tr>
             <th scope="row">LC</th>
-            {% for item in array%}     
+            {% for item in LC%}     
                 <td> {{item}} </td>
             {% endfor %}
            
@@ -38,14 +38,14 @@
 
         <tr>
             <th scope="row">RC</th>
-            {% for item in array%}     
+            {% for item in RC%}     
                 <td> {{item}} </td>
             {% endfor %}
         </tr>
 
         <tr>
             <th scope="row"> 출 석</th>
-            {% for item in array%}     
+            {% for item in total%}     
                 <td> {{item}} </td>
             {% endfor %}
         </tr>

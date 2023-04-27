@@ -15,24 +15,32 @@ async function authGoogleSheet() {
 
 
 // 인증번호 생성 & return
-exports.pnum = async(req, res) => {
+exports.pnum = async (req, res) => {
     //googlesheet 불러오기
-    authGoogleSheet(); 
+    authGoogleSheet();
     await doc.loadInfo();
-  
+
     //해당 반의 시트를 불러온다.
-    var sheet = doc.sheetsByIndex[req.body.class]; 
-    
+    var sheet = doc.sheetsByIndex[req.body.class];
+
+    req.session.class=req.body.class; //세션에 반 정보 저장
+
     await sheet.loadCells('B7:B100');
-  
-    for (var i = 7; i <= 96; i++) {
-      if(sheet.getCellByA1('B'+i).value===req.body.name){
-        exis=true;
-      }
-    }
-    
+
+    var i = 7;
+
+    do {
+        if (sheet.getCellByA1('B' + i).value === req.body.name) {
+            exis = true;
+            req.session.num = i; //세션에 반 정보 저장
+        }
+        i++
+    } while (i <= 96);
+
+
     if (exis) {
-        res.render('show');
-    } 
+        console.log(req.session);
+        res.redirect('/show');
+        // res.render('show');
+    }
 };
-  

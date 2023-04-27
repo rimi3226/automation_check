@@ -13,6 +13,7 @@ const { google } = require('googleapis');
 dotenv.config();
 const pageRouter = require('./routes/page');
 const authRouter = require('./routes/auth');
+const showRouter = require('./routes/show');
 
 
 
@@ -44,6 +45,7 @@ app.use(session({
 //app.use는 항상 쓰는 미들웨어이다.
 app.use('/', pageRouter);
 app.use('/auth',authRouter);
+app.use('/show',showRouter);
 
 
 app.use((req, res, next) => {

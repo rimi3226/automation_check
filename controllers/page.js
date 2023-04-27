@@ -1,3 +1,3 @@
 exports.renderMain = (req, res) => {
-    res.render('main');
-  };
+  res.render('main');
+};
