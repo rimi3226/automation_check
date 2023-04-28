@@ -60,7 +60,7 @@
             <form id="anum-form" action="/auth/anum" method="post" class="col-4">
                 <div class="row">
                     <div class="col-auto form-floating mb-3">
-                        <input type="text" class="form-control" id="pass" placeholder="인증번호">
+                        <input type="text" class="form-control" name="pass" placeholder="인증번호">
                         <label for="pass" class="px-4">인증번호</label>
                     </div>
                     <div class="col-auto">
@@ -84,5 +84,14 @@
         </div>
     </footer>
 </body>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    window.onload = () => {
+      if (new URL(location.href).searchParams.get('loginError')) {
+        alert(new URL(location.href).searchParams.get('loginError'));
+      }
+    };
+</script>
 
 </html>

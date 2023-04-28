@@ -9,4 +9,5 @@ router.use((req,res,next)=>{
 })
 
 router.get('/',renderMain);
+
 module.exports=router;

@@ -16,30 +16,7 @@ async function authGoogleSheet() {
 
 //구글시트에서 사용자 출석 정보 불러오기
 exports.anum = async (req, res) => {
-    //googlesheet 불러오기
-    authGoogleSheet();
-    await doc.loadInfo();
+    console.log(req.session);
+    res.redirect('/show');
 
-    //해당 반의 시트를 불러온다.
-    var sheet = doc.sheetsByIndex[req.body.class];
-
-    req.session.class=req.body.class; //세션에 반 정보 저장
-
-    await sheet.loadCells('B7:B100');
-
-    var i = 7;
-
-    do {
-        if (sheet.getCellByA1('B' + i).value === req.body.name) {
-            exis = true;
-            req.session.num = i; //세션에 반 정보 저장
-        }
-        i++
-    } while (i <= 96);
-
-
-    if (exis) {
-        console.log(req.session);
-        res.redirect('/show');
-    }
 };

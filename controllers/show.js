@@ -16,42 +16,48 @@ async function authGoogleSheet() {
 
 // 인증번호 생성 & return
 exports.renderShow = async (req, res) => {
-    authGoogleSheet();
-    await doc.loadInfo();
+    try {
+        authGoogleSheet();
+        await doc.loadInfo();
 
-    //해당 반의 시트를 불러온다.
-    var sheet = doc.sheetsByIndex[req.session.class];
+        console.log('show!!!!!');
+        console.log(req.session);
 
-    const num=req.session.num;
-    await sheet.loadCells('B'+num+':AF'+num);
+        //해당 반의 시트를 불러온다.
+        var sheet = doc.sheetsByIndex[req.session.class];
 
-    res.locals.name=sheet.getCellByA1('B'+num).value;
-    res.locals.attendance=Math.ceil((sheet.getCellByA1('AB'+num).value)*100);
-    
-    //출석 정보 배열에 담기
-    var RC=[];
-    var LC=[];
+        const id = req.session.num;
+        await sheet.loadCells('B' + id + ':AF' + id);
 
-    for(var j=69;j<=90;j++){
-        if(j%2===1){
-            if(sheet.getCellByA1((String.fromCharCode(j)+num)).value){
-                RC.push('O');
-            }else{
-                RC.push('X');
-            }
-        }else{
-            if(sheet.getCellByA1((String.fromCharCode(j)+num)).value){
-                LC.push('O');
-            }else{
-                LC.push('X');
+        res.locals.name = sheet.getCellByA1('B' + id).value;
+        res.locals.attendance = Math.ceil((sheet.getCellByA1('AB' + id).value) * 100);
+
+        //출석 정보 배열에 담기
+        var RC = [];
+        var LC = [];
+
+        for (var j = 69; j <= 90; j++) {
+            if (j % 2 === 1) {
+                if (sheet.getCellByA1((String.fromCharCode(j) + id)).value) {
+                    RC.push('O');
+                } else {
+                    RC.push('X');
+                }
+            } else {
+                if (sheet.getCellByA1((String.fromCharCode(j) + id)).value) {
+                    LC.push('O');
+                } else {
+                    LC.push('X');
+                }
             }
         }
+    } catch (err) {
+        // console.log(err);
     }
-
     //html로 데이터 보내기
-    res.locals.RC=RC;
-    res.locals.LC=LC;
-    res.locals.total=RC||LC;
+    res.locals.RC = RC;
+    res.locals.LC = LC;
+    res.locals.total = RC || LC;
 
     res.render('show');
 };
