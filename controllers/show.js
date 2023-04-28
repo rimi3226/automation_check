@@ -1,7 +1,7 @@
 //googleapis
 const { GoogleSpreadsheet } = require("google-spreadsheet");
 const gs_creds = require("../practice-384605-b85d8d7f9282.json"); // 키 생성 후 다운된 json파일을 지정합니다.
-const doc = new GoogleSpreadsheet("1TkELS-U9GuAAtjtwv4Bzlqv-GoDlMKih4BooG8Qp0NI");
+const doc = new GoogleSpreadsheet("1bkFj89KvXdXt5l96sAbejUql-b0kTp0zTIJhv7ktMe4");
 
 async function authGoogleSheet() {
     try {
@@ -26,7 +26,7 @@ exports.renderShow = async (req, res) => {
     await sheet.loadCells('B'+num+':AF'+num);
 
     res.locals.name=sheet.getCellByA1('B'+num).value;
-    res.locals.attendance=(sheet.getCellByA1('AB'+num).value)*100;
+    res.locals.attendance=Math.ceil((sheet.getCellByA1('AB'+num).value)*100);
     
     //출석 정보 배열에 담기
     var RC=[];
@@ -48,6 +48,7 @@ exports.renderShow = async (req, res) => {
         }
     }
 
+    //html로 데이터 보내기
     res.locals.RC=RC;
     res.locals.LC=LC;
     res.locals.total=RC||LC;

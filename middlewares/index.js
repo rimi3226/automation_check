@@ -1,7 +1,7 @@
 //googleapis
 const { GoogleSpreadsheet } = require("google-spreadsheet");
 const gs_creds = require("../practice-384605-b85d8d7f9282.json"); // 키 생성 후 다운된 json파일을 지정합니다.
-const doc = new GoogleSpreadsheet("1TkELS-U9GuAAtjtwv4Bzlqv-GoDlMKih4BooG8Qp0NI");
+const doc = new GoogleSpreadsheet("1bkFj89KvXdXt5l96sAbejUql-b0kTp0zTIJhv7ktMe4");
 
 async function authGoogleSheet() {
     try {
