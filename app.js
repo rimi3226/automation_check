@@ -8,14 +8,11 @@ const nunjucks = require('nunjucks');
 const dotenv = require('dotenv');
 const { google } = require('googleapis');
 
-
 //dotenv 불러오기
 dotenv.config();
 const pageRouter = require('./routes/page');
 const authRouter = require('./routes/auth');
 const showRouter = require('./routes/show');
-
-
 
 //라우터 기본 설정
 const app = express();
@@ -42,12 +39,12 @@ app.use(session({
   }
 }));
 
-//app.use는 항상 쓰는 미들웨어이다.
+// 라우터 연결
 app.use('/', pageRouter);
-app.use('/auth',authRouter);
-app.use('/show',showRouter);
+app.use('/auth', authRouter);
+app.use('/show', showRouter);
 
-
+// 라우터가 없을 경우
 app.use((req, res, next) => {
   const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`); //없는 페이지에 온 경우, 404 Not Found
   error.status = 404;
@@ -62,6 +59,7 @@ app.use((err, req, res, next) => {
   res.render('error'); //넌적스가 views폴더에서 찾아서 에러를 보내준다
 });
 
+// 서버 
 app.listen(app.get('port'), () => {
   console.log(app.get('port'), '번 포트에서 대기중');
 });

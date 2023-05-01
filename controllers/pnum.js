@@ -20,7 +20,7 @@ exports.pnum = async (req, res) => {
     try {
         client.messages
             .create({
-                body: 'STEP-UP 출석 확인 인증 번호입니다 : '+num,
+                body: 'STEP-UP 출석 확인 인증 번호입니다 : ' + num,
                 from: '+16203494088',
                 to: '+821095036290'
             })

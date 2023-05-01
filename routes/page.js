@@ -1,13 +1,13 @@
-const express=require('express');
-const {renderMain}=require('../controllers/page.js');
+const express = require('express');
+const { renderMain } = require('../controllers/page.js');
 
-const router=express.Router();
+const router = express.Router();
 
-router.use((req,res,next)=>{
-    res.locals.user=null;
+router.use((req, res, next) => {
+    res.locals.user = null;
     next();
 })
 
-router.get('/',renderMain);
+router.get('/', renderMain);
 
-module.exports=router;
+module.exports = router;

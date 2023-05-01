@@ -26,27 +26,25 @@
     </thead>
 
     <tbody>
-        <!-- 아직 렌더링 받은 결과가 없기때문에 잘 나오는지 확인하기위해서 array를 하나 선언했다. -->
-        {% set array = ['O','O','O','O','O','O','O','O','O','O','O'] %}
         <tr>
             <th scope="row">LC</th>
-            {% for item in LC%}     
-                <td> {{item}} </td>
+            {% for item in LC%}
+            <td> {{item}} </td>
             {% endfor %}
-           
+
         </tr>
 
         <tr>
             <th scope="row">RC</th>
-            {% for item in RC%}     
-                <td> {{item}} </td>
+            {% for item in RC%}
+            <td> {{item}} </td>
             {% endfor %}
         </tr>
 
         <tr>
             <th scope="row"> 출 석</th>
-            {% for item in total%}     
-                <td> {{item}} </td>
+            {% for item in total%}
+            <td> {{item}} </td>
             {% endfor %}
         </tr>
     </tbody>

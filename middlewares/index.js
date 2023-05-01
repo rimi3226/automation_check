@@ -49,6 +49,7 @@ exports.check_person = async (req, res, next) => {
   }
 };
 
+// (2) 인증번호가 맞는지 확인
 exports.check_authnum = async (req, res, next) => {
 
   if (req.session.auth_num?.toString() === req.body.pass) {
