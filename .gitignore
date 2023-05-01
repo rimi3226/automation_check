@@ -103,4 +103,11 @@ dist
 # TernJS port file
 .tern-port
 
-.practice-384605-b85d8d7f9282.json
+#출석부 파일
+practice-384605-b85d8d7f9282.json
+
+#DS_Store
+.DS_Store
+
+#모듈 연습했던 파일
+prac/
