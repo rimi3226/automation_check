@@ -57,7 +57,7 @@ exports.renderShow = async (req, res) => {
     //html로 데이터 보내기
     res.locals.RC = RC;
     res.locals.LC = LC;
-    res.locals.total = RC || LC;
+    res.locals.total = RC && LC;
 
     res.render('show');
 };
