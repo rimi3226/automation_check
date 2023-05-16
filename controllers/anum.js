@@ -5,7 +5,6 @@ const doc = new GoogleSpreadsheet("1bkFj89KvXdXt5l96sAbejUql-b0kTp0zTIJhv7ktMe4"
 
 async function authGoogleSheet() {
     try {
-
         await doc.useServiceAccountAuth(gs_creds);
         await doc.loadInfo();
     } catch (err) {

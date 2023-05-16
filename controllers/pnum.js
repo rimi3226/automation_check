@@ -16,21 +16,24 @@ exports.pnum = async (req, res) => {
     console.log(num);
     req.session.auth_num = num;
 
+    //twilio로 보낼 전화번호 생성
+    const phone='+82'+req.session.pnumber;
+    console.log(phone);
+
     //twilio
-    try {
-        client.messages
-            .create({
-                body: 'STEP-UP 출석 확인 인증 번호입니다 : ' + num,
-                from: '+16203494088',
-                to: '+821095036290'
-            })
-            .then(message => console.log(message.sid));
-    } catch (err) {
-        console.log(err);
-    }
-
-
+    // try {
+    //     client.messages
+    //         .create({
+    //             body: 'STEP-UP 출석 확인 인증 번호입니다 : ' + num,
+    //             from: '+16203494088',
+    //             to: phone
+    //         })
+    //         .then(message => console.log(message.sid));
+    // } catch (err) {
+    //     console.log(err);
+    // }
+    
     res.redirect(`/?Auth=complete`);
 
-
 };
+

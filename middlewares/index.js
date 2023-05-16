@@ -26,10 +26,9 @@ exports.check_person = async (req, res, next) => {
 
     req.session.class = req.body.class; //세션에 반 정보 저장
 
-    await sheet.loadCells('B7:B100');
+    await sheet.loadCells('B7:D100');
     var exis = false;
     var i = 7;
-
     do {
       if (sheet.getCellByA1('B' + i).value === req.body.name) {
         exis = true;
@@ -39,14 +38,22 @@ exports.check_person = async (req, res, next) => {
       i++;
     } while (i <= 96);
 
+    const pnumber=sheet.getCellByA1('D' + req.session.num).value;
+    req.session.pnumber=pnumber.substring(1,3)+pnumber.substring(4,8)+pnumber.substring(9,13);
+
+
     if (exis) {
-      console.log(req.session);
-      next();
+      if('0'+req.session.pnumber!=req.body.pnumber){
+        res.redirect(`/?Auth=nopnumber`);
+      }else{
+        next();
+      }
     } else {
       res.redirect(`/?Auth=fail`);
     }
   } catch (err) {
-    res.redirect(`/?Auth=fail`);
+    console.log(err);
+    res.redirect(`/?Auth=error`);
   }
 };
 
