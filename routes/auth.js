@@ -6,8 +6,10 @@ const { anum } = require('../controllers/anum.js');
 
 const router = express.Router();
 
-// POST
+// POST /auth/pnum
 router.post('/pnum', check_person, pnum);
+
+// POST /auth/anum
 router.post('/anum', check_authnum, anum);
 
 

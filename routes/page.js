@@ -8,6 +8,7 @@ router.use((req, res, next) => {
     next();
 })
 
+// GET /
 router.get('/', renderMain);
 
 module.exports = router;

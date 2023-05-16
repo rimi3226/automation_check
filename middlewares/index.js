@@ -3,6 +3,7 @@ const { GoogleSpreadsheet } = require("google-spreadsheet");
 const gs_creds = require("../practice-384605-b85d8d7f9282.json"); // 키 생성 후 다운된 json파일을 지정합니다.
 const doc = new GoogleSpreadsheet("1bkFj89KvXdXt5l96sAbejUql-b0kTp0zTIJhv7ktMe4");
 
+//구글 시트랑 연동시키기
 async function authGoogleSheet() {
   try {
 
@@ -26,7 +27,7 @@ exports.check_person = async (req, res, next) => {
     req.session.class = req.body.class; //세션에 반 정보 저장
 
     await sheet.loadCells('B7:B100');
-
+    var exis = false;
     var i = 7;
 
     do {

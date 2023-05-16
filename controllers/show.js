@@ -27,16 +27,16 @@ exports.renderShow = async (req, res) => {
         var sheet = doc.sheetsByIndex[req.session.class];
 
         const id = req.session.num;
-        await sheet.loadCells('B' + id + ':AF' + id);
+        await sheet.loadCells('B' + id + ':Z' + id);
 
         res.locals.name = sheet.getCellByA1('B' + id).value;
-        res.locals.attendance = Math.ceil((sheet.getCellByA1('AB' + id).value) * 100);
+        res.locals.attendance = Math.ceil((sheet.getCellByA1('Z' + id).value) * 100);
 
         //출석 정보 배열에 담기
         var RC = [];
         var LC = [];
 
-        for (var j = 69; j <= 90; j++) {
+        for (var j = 69; j <= 88; j++) {
             if (j % 2 === 1) {
                 if (sheet.getCellByA1((String.fromCharCode(j) + id)).value) {
                     RC.push('O');
