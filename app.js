@@ -47,7 +47,6 @@ const sessionOption = {
 
 if (process.env.NODE_ENV === 'production') {
   sessionOption.proxy = true;
-  // sessionOption.cookie.secure=true;
 }
 app.use(session(sessionOption));
 
@@ -70,7 +69,7 @@ app.use((err, req, res, next) => {
   res.locals.message = err.message;
   res.locals.error = process.env.NODE_ENV !== 'production' ? err : {};
   res.status(err.status || 500);
-  res.render('error'); //넌적스가 views폴더에서 찾아서 에러를 보내준다
+  res.render('error');
 });
 
 module.exports = app;

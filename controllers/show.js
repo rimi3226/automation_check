@@ -5,7 +5,6 @@ const doc = new GoogleSpreadsheet("1bkFj89KvXdXt5l96sAbejUql-b0kTp0zTIJhv7ktMe4"
 
 async function authGoogleSheet() {
     try {
-
         await doc.useServiceAccountAuth(gs_creds);
         await doc.loadInfo();
     } catch (err) {
@@ -20,13 +19,13 @@ exports.renderShow = async (req, res) => {
         authGoogleSheet();
         await doc.loadInfo();
 
-        console.log('show!!!!!');
-        console.log(req.session);
-
-        //해당 반의 시트를 불러온다.
+        //해당 반 시트를 불러오기
         var sheet = doc.sheetsByIndex[req.session.class];
 
+        //학생 정보를 session에 저장
         const id = req.session.num;
+
+        //구글 스프레드시트에서 학생 정보 불러오기
         await sheet.loadCells('B' + id + ':Z' + id);
 
         res.locals.name = sheet.getCellByA1('B' + id).value;
@@ -52,8 +51,9 @@ exports.renderShow = async (req, res) => {
             }
         }
     } catch (err) {
-        // console.log(err);
+        console.log(err);
     }
+
     //html로 데이터 보내기
     res.locals.RC = RC;
     res.locals.LC = LC;

@@ -13,9 +13,14 @@ async function authGoogleSheet() {
 }
 
 
-//구글시트에서 사용자 출석 정보 불러오기
+//인증 번호가 일치하는지 확인
 exports.anum = async (req, res) => {
-    console.log(req.session);
-    res.redirect('/show');
+    if (req.session.auth_num?.toString() === req.body.pass) {
+        console.log(req.session);
+        res.redirect('/show');
+
+    } else {
+        res.redirect(`/?Auth=authfail`);
+    }
 
 };
