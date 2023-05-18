@@ -68,7 +68,11 @@ typings/
 # Yarn Integrity file
 .yarn-integrity
 
+#.env
+.env
 
+#key
+practice-384605-b85d8d7f9282.json
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
