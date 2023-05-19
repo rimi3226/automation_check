@@ -34,6 +34,7 @@ exports.renderShow = async (req, res) => {
         //출석 정보 배열에 담기
         var RC = [];
         var LC = [];
+        var total=[];
 
         for (var j = 69; j <= 88; j++) {
             if (j % 2 === 1) {
@@ -50,6 +51,14 @@ exports.renderShow = async (req, res) => {
                 }
             }
         }
+
+        for(var m=0;m<10;m++){         
+            if((RC[m]==='O')&&(LC[m]==='O')){
+                total.push('O');
+            }else{
+                total.push('X');
+            }
+        };
     } catch (err) {
         console.log(err);
     }
@@ -57,7 +66,8 @@ exports.renderShow = async (req, res) => {
     //html로 데이터 보내기
     res.locals.RC = RC;
     res.locals.LC = LC;
-    res.locals.total = RC && LC;
+    res.locals.total=total;
+    
 
     res.render('show');
 };
